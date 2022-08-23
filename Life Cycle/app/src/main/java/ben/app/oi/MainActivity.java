@@ -5,29 +5,49 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
+
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        tv = findViewById(R.id.textView);
+        tv.append("onCreate\n");
     }
 
-    public void next(View v){
-        EditText uname = findViewById(R.id.name);
-        EditText pwd = findViewById(R.id.pass);
-//        Intent intent = new Intent(this,SecondActivity.class);
-//        intent.putExtra("name",uname.getText().toString());
-//        intent.putExtra("pass",pwd.getText().toString());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        tv.append("onResume\n");
+    }
 
-        if(uname.getText().toString().equals("benoi") && pwd.getText().toString().equals("123")) {
-            uname.setError(null);
-            Toast.makeText(this, String.format("Welcome: %s",
-                            uname.getText().toString()),
-                    Toast.LENGTH_SHORT).show();
-        }
-        else uname.setError("Invalid username or password");
+    @Override
+    protected void onStart() {
+        super.onStart();
+        tv.append("onStart\n");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        tv.append("onPause\n");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        tv.append("onStop\n");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//        tv.append("onDestroy\n");
+        Toast.makeText(this,"onDestroy",Toast.LENGTH_SHORT).show();
     }
 }
