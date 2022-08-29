@@ -3,8 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Apps/Mark Card/app/src/main/res/layout/activity_main.xml" value="0.17074275362318841" />
-        <entry key="..\:/App/app/src/main/res/layout/activity_main.xml" value="0.153125" />
+        <entry key="..\:/MarkCalculator/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/MarkCalculator/app/src/main/res/layout/activity_status.xml" value="0.33" />
       </map>
     </option>
   </component>
