@@ -19,8 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="number" />
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/op"
@@ -34,8 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Number 2"
-        android:inputType="number" />
+        android:hint="Number 2" />
     <TextView
         android:id="@+id/result"
         android:layout_width="wrap_content"

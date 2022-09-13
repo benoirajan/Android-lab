@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        int number1 = Integer.parseInt(n1.getText().toString());
-        int number2 = Integer.parseInt(n2.getText().toString());
+        float number1 = Float.parseFloat(n1.getText().toString());
+        float number2 = Float.parseFloat(n2.getText().toString());
 
         Button b = (Button) view;
 
