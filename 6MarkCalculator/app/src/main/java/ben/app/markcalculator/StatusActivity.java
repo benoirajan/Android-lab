@@ -2,6 +2,7 @@ package ben.app.markcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -26,10 +27,12 @@ public class StatusActivity extends AppCompatActivity {
                 markView.setText("Mark: " + mark);
 
                 if (p > 50)
-                    status.setText(name + " poli thanne");
+                    status.setText(name + " Congrats");
 
-                else
-                    status.setText("Poda po Kannappi " + name);
+                else {
+                    status.setTextColor(Color.RED);
+                    status.setText(name + " you failed");
+                }
             }
         }
     }
