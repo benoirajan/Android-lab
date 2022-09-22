@@ -1,35 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/op_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
 
     <GridLayout
+
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:columnCount="4">
+
+        <TextView
+            android:id="@+id/op_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="4"
+            android:layout_gravity="end"
+            android:hint="0"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/op2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnSpan="4"
+            android:layout_gravity="end"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_rowWeight="1"
+            android:layout_columnSpan="4"
+            android:layout_gravity="end"
+            android:hint="0"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/division"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="operator"
+            android:text="÷" />
+
+        <Button
+            android:id="@+id/multiply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="operator"
+            android:text="×" />
+
+        <Button
+            android:id="@+id/sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="operator"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="operator"
+            android:text="+" />
 
         <Button
             android:id="@+id/n7"
@@ -52,11 +91,15 @@
             android:onClick="num"
             android:text="9" />
 
+
         <Button
-            android:id="@+id/division"
+            android:id="@+id/equal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="÷" />
+            android:layout_rowSpan="4"
+            android:layout_rowWeight="1"
+            android:onClick="operator"
+            android:text="=" />
 
         <Button
             android:id="@+id/n4"
@@ -79,11 +122,6 @@
             android:onClick="num"
             android:text="6" />
 
-        <Button
-            android:id="@+id/multiply"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="×" />
 
         <Button
             android:id="@+id/n1"
@@ -107,10 +145,11 @@
             android:text="3" />
 
         <Button
-            android:id="@+id/sub"
+            android:id="@+id/dot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="-" />
+            android:onClick="num"
+            android:text="." />
 
         <Button
             android:id="@+id/n0"
@@ -120,23 +159,12 @@
             android:text="0" />
 
         <Button
-            android:id="@+id/dot"
+            android:id="@+id/ac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="num"
-            android:text="." />
+            android:onClick="operator"
+            android:text="AC" />
 
-        <Button
-            android:id="@+id/eqal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="=" />
-
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+" />
 
     </GridLayout>
 
