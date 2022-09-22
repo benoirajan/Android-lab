@@ -55,6 +55,7 @@ public class MainActivity extends Activity {
         switch (id) {
             case R.id.add:
                 op1Text.append(" +");
+                op1Text.setText(findResult()+" +");
                 break;
             case R.id.sub:
                 op1Text.append(" -");
@@ -66,12 +67,13 @@ public class MainActivity extends Activity {
                 op1Text.append(" ×");
                 break;
         }
+        op2Text.setText("");
         opr = op2Text;
     }
 
-    private void findResult() {
+    private double findResult() {
         if (op2Text.getText().toString() == null || op2Text.getText().toString().isEmpty())
-            return;
+            return op1;
         op2 = Double.parseDouble(op2Text.getText().toString());
         double res = 0;
         switch (opId) {
@@ -90,6 +92,7 @@ public class MainActivity extends Activity {
         }
         resultTxt.setText("= " + res);
         opr = op1Text;
+        return res;
     }
 
     private void clear() {
