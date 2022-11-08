@@ -12,7 +12,8 @@ public class DbUtil extends SQLiteOpenHelper {
 
     public static final String CREATE_TABLE = "CREATE TABLE " + BatteryInfo.TABLE_NAME +
             " (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-            BatteryInfo.TIME + " TEXT  NOT NULL, " +
+            BatteryInfo.DATE + " TEXT  NOT NULL, " +
+            BatteryInfo.TIME + " INTEGER  NOT NULL, " +
             BatteryInfo.TEMPERATURE + " REAL NOT NULL, " +
             BatteryInfo.PERCENTAGE + " INTEGER NOT NULL)";
 
@@ -34,11 +35,12 @@ public class DbUtil extends SQLiteOpenHelper {
     }
 
 
-    public static void insertBat(SQLiteDatabase db, String time, float temperature, int percent) {
+    public static void insertBat(SQLiteDatabase db, long time, float temperature, int percent,String date) {
         ContentValues values = new ContentValues();
         values.put(BatteryInfo.PERCENTAGE, percent);
         values.put(BatteryInfo.TEMPERATURE, temperature);
         values.put(BatteryInfo.TIME, time);
+        values.put(BatteryInfo.DATE,date);
 
         if (db.insert(BatteryInfo.TABLE_NAME, null, values) == -1)
             throw new SQLiteException("Error on query : " + values.toString());
