@@ -17,9 +17,9 @@ public class MainActivity extends Activity {
     }
 
     public void next(View v){
-        EditText uname = findViewById(R.id.name);
-        EditText pwd = findViewById(R.id.pass);
-
+        EditText m1 = findViewById(R.id.m1);
+        EditText m2 = findViewById(R.id.m2);
+        EditText m3 = findViewById(R.id.m3);
         getSharedPreferences("s",MODE_PRIVATE)
                 .edit()
                 .putString("uname",uname.getText().toString())
