@@ -1,6 +1,7 @@
 package ben.app.a12sqlite;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
@@ -8,11 +9,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -21,13 +29,13 @@ import ben.app.a12sqlite.db.BatteryInfo;
 import ben.app.a12sqlite.db.DbUtil;
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tv = findViewById(R.id.text);
+        listView = findViewById(R.id.list);
         findViewById(R.id.button).setOnClickListener(v -> {
             recordBattery();
             showDb();
@@ -55,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("DefaultLocale")
     private void showDb() {
-        tv.setText("Percent, Time, Temperature\n");
+//        listView.setText("Percent, Time, Temperature\n");
         SQLiteDatabase db = new DbUtil(this).getReadableDatabase();
 
         Date c = Calendar.getInstance().getTime();
@@ -77,7 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
 //        data = new String[cursor.getCount()][DailyUtil.COUNT];
 //        amount = new double[cursor.getCount()];
-//        ids = new long[cursor.getCount()];
+//        ids = new long[cursor.getCount()];\
+        ArrayList<String> d = new ArrayList<>();
+        ArrayList<Integer> p = new ArrayList<>();
+        ArrayList<Integer> t = new ArrayList<>();
         while (cursor.moveToNext()) {
             long percentage = cursor.getLong(
                     cursor.getColumnIndexOrThrow(BatteryInfo.PERCENTAGE));
@@ -86,11 +97,47 @@ public class MainActivity extends AppCompatActivity {
             double temperature = cursor.getDouble(
                     cursor.getColumnIndexOrThrow(BatteryInfo.TEMPERATURE));
 
-            tv.append(String.format("{ %d, %s, %f },\n", percentage, time, temperature/10f));
+            d.add(time);
+            t.add((int) temperature);
+            p.add((int) percentage);
         }
         cursor.close();
 
+        MyAd adapter = new MyAd(this,R.layout.list,(Integer[]) p.toArray(),(Integer[])t.toArray(),(String[])d.toArray());
+        listView.setAdapter(adapter);
     }
 
 
+    class MyAd extends ArrayAdapter<String> {
+
+        private Integer[] perc, temp;
+        private String[] date;
+
+        public MyAd(@NonNull Context context, int resource, Integer[] per, Integer[] temp, String[] d) {
+            super(context, resource);
+            perc = per;
+            this.temp = temp;
+            date = d;
+        }
+
+        @Override
+        public int getCount() {
+            return perc.length;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            if (convertView == null)
+                convertView = getLayoutInflater().inflate(R.layout.list, parent);
+
+            TextView tv = convertView.findViewById(R.id.date);
+            TextView per = convertView.findViewById(R.id.info);
+
+            tv.setText(date[position]);
+            per.setText(String.format("%d% | %d°C", perc[position], temp[position]));
+
+            return convertView;
+        }
+    }
 }
