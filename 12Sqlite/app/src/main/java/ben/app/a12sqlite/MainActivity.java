@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         }
         cursor.close();
 
-        MyAd adapter = new MyAd(this,R.layout.list,(Integer[]) p.toArray(),(Integer[])t.toArray(),(String[])d.toArray());
+        MyAd adapter = new MyAd(this,R.layout.list,p,t,d);
         listView.setAdapter(adapter);
     }
 
@@ -113,11 +113,15 @@ public class MainActivity extends AppCompatActivity {
         private Integer[] perc, temp;
         private String[] date;
 
-        public MyAd(@NonNull Context context, int resource, Integer[] per, Integer[] temp, String[] d) {
+        public MyAd(@NonNull Context context, int resource, ArrayList<Integer> per, ArrayList<Integer> temp, ArrayList<String> d) {
             super(context, resource);
-            perc = per;
-            this.temp = temp;
-            date = d;
+            perc = new Integer[per.size()];
+            this.temp = new Integer[per.size()];
+            date = new String[per.size()];
+
+            per.toArray(perc);
+            temp.toArray(this.temp);
+            d.toArray(date);
         }
 
         @Override
@@ -129,13 +133,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             if (convertView == null)
-                convertView = getLayoutInflater().inflate(R.layout.list, parent);
+                convertView = getLayoutInflater().inflate(R.layout.list,null);
 
             TextView tv = convertView.findViewById(R.id.date);
             TextView per = convertView.findViewById(R.id.info);
 
+            Log.d("shit",perc[position]+"% | "+ temp[position]+"°C");
             tv.setText(date[position]);
-            per.setText(String.format("%d% | %d°C", perc[position], temp[position]));
+            per.setText(perc[position]+"% | "+ temp[position]+"°C");
 
             return convertView;
         }
